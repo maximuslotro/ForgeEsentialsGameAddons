@@ -1,0 +1,22 @@
+modLoader="javafml"
+loaderVersion="[36,)"
+license="GNU General Public License v3.0"
+
+[[mods]]
+    modId="fegameaddons" 
+    version="${file.jarVersion}"
+    displayName="FEGameAddons"
+    description='''Game Addon Module for ForgeEssentials 1.16.5'''
+
+[[dependencies.fegameaddons]]
+    modId="forge"
+    mandatory=true
+    versionRange="[36,)"
+    ordering="NONE"
+    side="SERVER"
+[[dependencies.fegameaddons]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.5,1.17)"
+    ordering="NONE"
+    side="BOTH"
