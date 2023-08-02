@@ -1,6 +1,5 @@
 package fegameaddons.forgeessentialsaddons;
 
-import net.minecraft.command.CommandSource;
 import net.minecraft.entity.player.ServerPlayerEntity;
 
 import java.io.File;
@@ -8,17 +7,16 @@ import java.util.Map;
 
 import com.forgeessentials.core.config.ConfigData;
 import com.forgeessentials.core.config.ConfigLoaderBase;
-import com.forgeessentials.core.misc.FECommandManager;
+import com.forgeessentials.core.misc.commandTools.FECommandManager;
 import com.forgeessentials.core.moduleLauncher.FEModule;
 import com.forgeessentials.core.moduleLauncher.FEModule.Preconditions;
 import com.forgeessentials.util.events.FEModuleEvent.FEModuleServerStoppedEvent;
-import com.forgeessentials.util.events.FERegisterCommandsEvent;
-import com.mojang.brigadier.CommandDispatcher;
 
 import fegameaddons.FEGameAddons;
 import fegameaddons.forgeessentialsaddons.dungon.DungeonGame;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.Builder;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 
@@ -52,10 +50,9 @@ public class ModuleGames extends ConfigLoaderBase
     }
 
     @SubscribeEvent
-    public void registerCommands(FERegisterCommandsEvent event)
+    public void registerCommands(RegisterCommandsEvent event)
     {
-        CommandDispatcher<CommandSource> dispatcher = event.getRegisterCommandsEvent().getDispatcher();
-        FECommandManager.registerCommand(new CommandGame(true), dispatcher);
+        FECommandManager.registerCommand(new CommandGame(true), event.getDispatcher());
     }
     /*
     @SubscribeEvent

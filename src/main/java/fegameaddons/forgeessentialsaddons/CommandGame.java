@@ -121,12 +121,6 @@ public class CommandGame extends ForgeEssentialsCommandBuilder implements CONSTA
     }
 
     @Override
-    public String getPermissionNode()
-    {
-        return "fe.game";
-    }
-
-    @Override
     public DefaultPermissionLevel getPermissionLevel()
     {
         return DefaultPermissionLevel.ALL;
