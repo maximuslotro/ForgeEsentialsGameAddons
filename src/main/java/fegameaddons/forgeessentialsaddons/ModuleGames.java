@@ -20,7 +20,7 @@ import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 
-@FEModule(name = "GameAddons", parentMod = FEGameAddons.class, defaultModule = false)
+@FEModule(name = "GameAddons", parentMod = FEGameAddons.class, defaultModule = true)
 public class ModuleGames extends ConfigLoaderBase
 {
     private static ForgeConfigSpec GAME_CONFIG;
