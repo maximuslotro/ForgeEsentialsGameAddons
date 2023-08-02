@@ -7,8 +7,8 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraftforge.server.permission.DefaultPermissionLevel;
 
 import java.io.File;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.forgeessentials.core.commands.ForgeEssentialsCommandBuilder;
 import com.forgeessentials.util.output.ChatOutputHandler;
@@ -59,10 +59,13 @@ public class CommandGame extends ForgeEssentialsCommandBuilder implements CONSTA
 	}
 
     public static final SuggestionProvider<CommandSource> SUGGEST_MAPS = (ctx, builder) -> {
-        return ISuggestionProvider.suggest(Stream.of(ModuleGames.moduleDir.listFiles())
-  	          .filter(file -> !file.isDirectory())
-  	          .map(File::getName)
-  	          .collect(Collectors.toSet()), builder);
+    	List<String> games = new ArrayList<>();
+    	for(File f :ModuleGames.moduleDir.listFiles()) {
+    		if(!f.isDirectory()&&f.getName().endsWith(".txt")) {
+    			games.add(f.getName().replace(".txt", ""));
+    		}
+    	}
+        return ISuggestionProvider.suggest(games, builder);
     };
 
     @Override

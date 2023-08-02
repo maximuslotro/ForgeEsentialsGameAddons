@@ -92,6 +92,7 @@ public class DungeonGame implements CONSTANTS{
 			reader.close();
 			map=mapNew;
 		} catch (IOException e) {
+			e.printStackTrace();
 			return;
 		}
 	}
@@ -411,7 +412,7 @@ public class DungeonGame implements CONSTANTS{
 	    if(input.equals(MOVE_LEFT)){
 	        nextCol-=1;
 	    }
-	    if(input.equals( MOVE_RIGHT)){
+	    if(input.equals(MOVE_RIGHT)){
 	        nextCol+=1;
 	    }
 	}
