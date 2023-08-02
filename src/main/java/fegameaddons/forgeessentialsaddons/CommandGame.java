@@ -2,8 +2,13 @@ package fegameaddons.forgeessentialsaddons;
 
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
+import net.minecraft.command.ISuggestionProvider;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraftforge.server.permission.DefaultPermissionLevel;
+
+import java.io.File;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.forgeessentials.core.commands.ForgeEssentialsCommandBuilder;
 import com.forgeessentials.util.output.ChatOutputHandler;
@@ -12,6 +17,7 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.brigadier.suggestion.SuggestionProvider;
 
 import fegameaddons.forgeessentialsaddons.dungon.CONSTANTS;
 import fegameaddons.forgeessentialsaddons.dungon.DungeonGame;
@@ -42,6 +48,7 @@ public class CommandGame extends ForgeEssentialsCommandBuilder implements CONSTA
         				)
         		.then(Commands.literal("load")
         				.then(Commands.argument("mapName", StringArgumentType.word())
+        						.suggests(SUGGEST_MAPS)
         						.executes(CommandContext -> execute(CommandContext, "load"))))
         		.then(Commands.literal("redraw")
         				.executes(CommandContext -> execute(CommandContext, "redraw")))
@@ -50,6 +57,13 @@ public class CommandGame extends ForgeEssentialsCommandBuilder implements CONSTA
         		.executes(CommandContext -> execute(CommandContext, "help")
                         );
 	}
+
+    public static final SuggestionProvider<CommandSource> SUGGEST_MAPS = (ctx, builder) -> {
+        return ISuggestionProvider.suggest(Stream.of(ModuleGames.moduleDir.listFiles())
+  	          .filter(file -> !file.isDirectory())
+  	          .map(File::getName)
+  	          .collect(Collectors.toSet()), builder);
+    };
 
     @Override
     public int processCommandPlayer(CommandContext<CommandSource> ctx, String params) throws CommandSyntaxException
@@ -83,11 +97,11 @@ public class CommandGame extends ForgeEssentialsCommandBuilder implements CONSTA
     	}
     	if(params.equals("load")) {
     		String mapName = StringArgumentType.getString(ctx, "mapName");
-    		ModuleGames.setPlayerGame(player, new DungeonGame(mapName, ctx.getSource()));
-    		if(ModuleGames.getPlayerGame(player).invalid) {
-    			ModuleGames.setPlayerGame(player, null);
+    		DungeonGame game = new DungeonGame(mapName, ctx.getSource());
+    		if(game.invalid) {
     			return Command.SINGLE_SUCCESS;
     		}
+    		ModuleGames.setPlayerGame(player, game);
     		ModuleGames.getPlayerGame(player).printInstructions(ctx.getSource());
     		ModuleGames.getPlayerGame(player).outputMap(ctx.getSource());
     		return Command.SINGLE_SUCCESS;
