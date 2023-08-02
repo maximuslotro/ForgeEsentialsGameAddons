@@ -29,9 +29,8 @@ public class DungeonGame implements CONSTANTS{
 		loadLevel(fileName);
 		if (map == null) {
         	ChatOutputHandler.chatWarning(source, "A map by that name does not exist!");
-        	System.out.print("Null map found, check if map has correct name or internals");
+        	System.out.println("Null map found, check if map has correct name or internals");
         	invalid = true;
-            return;
         }
 	}
 	
