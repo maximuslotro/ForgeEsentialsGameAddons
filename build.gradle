@@ -16,8 +16,8 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 version = '1.0'
-group = 'cfegameaddons'
-archivesBaseName = 'fegameaddons'
+group = 'fegameaddons'
+archivesBaseName = 'fegameaddons-1.16.5'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8) // Mojang ships Java 8 to end users, so your mod should target Java 8.
 
