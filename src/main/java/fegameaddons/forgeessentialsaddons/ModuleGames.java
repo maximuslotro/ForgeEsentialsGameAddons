@@ -3,6 +3,7 @@ package fegameaddons.forgeessentialsaddons;
 import net.minecraft.entity.player.ServerPlayerEntity;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.forgeessentials.core.config.ConfigData;
@@ -10,6 +11,7 @@ import com.forgeessentials.core.config.ConfigLoaderBase;
 import com.forgeessentials.core.misc.commandTools.FECommandManager;
 import com.forgeessentials.core.moduleLauncher.FEModule;
 import com.forgeessentials.core.moduleLauncher.FEModule.Preconditions;
+import com.forgeessentials.util.events.FEModuleEvent.FEModuleServerAboutToStartEvent;
 import com.forgeessentials.util.events.FEModuleEvent.FEModuleServerStoppedEvent;
 
 import fegameaddons.FEGameAddons;
@@ -54,9 +56,12 @@ public class ModuleGames extends ConfigLoaderBase
     {
         FECommandManager.registerCommand(new CommandGame(true), event.getDispatcher());
     }
-    /*
+
     @SubscribeEvent
-    public void serverStopping(FEModuleServerAboutToStartEvent e) {}
+    public void serverStopping(FEModuleServerAboutToStartEvent e) {
+    	games = new HashMap<>();
+    }
+    /*
     @SubscribeEvent
     public void serverStopping(FEModuleServerStartingEvent e) {}
     @SubscribeEvent
