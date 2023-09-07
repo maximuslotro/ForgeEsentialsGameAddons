@@ -6,9 +6,10 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.forgeessentials.core.ForgeEssentials;
+import com.forgeessentials.core.commands.registration.FECommandManager;
 import com.forgeessentials.core.config.ConfigData;
 import com.forgeessentials.core.config.ConfigLoaderBase;
-import com.forgeessentials.core.misc.commandTools.FECommandManager;
 import com.forgeessentials.core.moduleLauncher.FEModule;
 import com.forgeessentials.core.moduleLauncher.FEModule.Preconditions;
 import com.forgeessentials.util.events.FEModuleEvent.FEModuleServerAboutToStartEvent;
@@ -22,7 +23,7 @@ import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 
-@FEModule(name = "GameAddons", parentMod = FEGameAddons.class, defaultModule = true)
+@FEModule(name = "GameAddons", parentMod = FEGameAddons.class, defaultModule = true, version = ForgeEssentials.CURRENT_MODULE_VERSION)
 public class ModuleGames extends ConfigLoaderBase
 {
     private static ForgeConfigSpec GAME_CONFIG;
