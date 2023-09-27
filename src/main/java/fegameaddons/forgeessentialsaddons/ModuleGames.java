@@ -38,7 +38,7 @@ public class ModuleGames extends ConfigLoaderBase
     public static File moduleDir;
 
     @Preconditions
-    public boolean preInit()
+    public static boolean preInit()
     {
         if (FMLEnvironment.dist.isClient())
             return false;
